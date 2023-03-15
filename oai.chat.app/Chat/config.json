@@ -1,0 +1,6 @@
+{
+  "COMPLETIONS_MODEL": "<Completions (deployment) Model Name>",
+  "OPENAI_API_BASE": "https://<Your Azure Resource Name>.openai.azure.com",
+  "OPENAI_API_VERSION": "2022-12-01",
+  "OPENAI_API_KEY": "<OpenAPI Key>"
+}
