@@ -17,10 +17,9 @@ app = Flask(__name__)
 @app.route('/', methods=('GET', 'POST'))
 @app.route('/index', methods=('GET', 'POST'))
 def index():
-    completion = 'Hello'
+    completion = ''
     if request.method == 'POST':
         prompt = request.form['prompt']
-        completion = ''
 
         if not prompt:
             #flash('A question or message is required!')
@@ -43,7 +42,8 @@ def postMessage(prompt):
     with open(configFilePath) as config_file:
         config_details = json.load(config_file)
 
-    print(config_details)
+    #print(config_details)
+
     # Setting up the deployment name
     deployment_name = config_details['COMPLETIONS_MODEL']
 

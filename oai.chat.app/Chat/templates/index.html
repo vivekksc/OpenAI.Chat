@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{% block title %} Chat {% endblock %}</h1>
 <form method="post">
-    <label for="prompt">Ask</label>
+    <!--<label for="prompt">Ask</label>
     <br>
     <textarea name="prompt"
               placeholder="Type your question or message"
@@ -15,6 +14,63 @@
     <br>
     <label name="completion">{{ completion }}</label>
     <br>
-    <button type="submit">Send</button>
+    <button type="submit">Send</button>-->
+
+    <table width="90%" border=0 align="center">
+        <TR>
+            <TD width="75%" valign="top">
+                <div class="chat-container">
+                    <div class="chat-message user-message">
+                        Use this Chat to generate starter content, get help rewriting text or summarize multiple paragraphs.
+                    </div>
+                    <form>
+                        <textarea name="prompt" placeholder="What would you like to me to do?" maxlength="300">{{ request.form['prompt'] }}</textarea>
+                        <input type="length" name="length" placeholder="300" readonly />
+                        <!--<span id='remainingC'></span>-->
+                        <button type="submit">Send</button>
+                        <br><br><b>Here is my response:</b><br><br>
+                        <div class="chat-message bot-message">
+                            {{ completion }}
+                        </div>
+                    </form>
+                </div>
+            </TD>
+            <TD width="1%"></TD>
+            <TD width="24%" valign="top">
+                <b>Here are some of the things I can do:</b><br>
+                <p>
+                    <BR><i>Important: prompts can only have a maximum of 2000 characters.  No need to count though, we won't let you put more than that in the box on the left.  If you would like a response that is a bit longer, simply change the '300' in the box next to the submit button to something a bit lager and you will get more text in the response.</i>
+                    <br><br><br>
+                    <b>Suggest text</b><BR>
+                    Begin your request with any of the following commands or try one of your own.  Make sure to put a semi-colon after your command and before your prompt.
+                    <ul>
+                        <li>Write a paragraph about: </li>
+                        <li>Write a social media style post about:</li>
+                        <li>Rewrite this in a casual tone:</li>
+                        <li>Create a tagline using these words and phrases:</li>
+                    </ul>
+                    <br>
+                <p>
+                    <b>Summarize text</b><BR>
+                    Begin your request with any of the following commands or try one of your own.  Make sure to put a semi-colon after your command and before the text.
+                    <ul>
+                        <li>Summarize the following paragraph:</li>
+                        <li>TLDR: (that stands for too lazy didn't read)</li>
+                        <li>What is this text about: </li>
+                    </ul>
+                    <br>
+                <p>
+                    <b>Extract themes</b><BR>
+                    Begin your request with any of the following commands or try one of your own.  This works best with punctuation separating the command from the text.
+                    <ul>
+                        <li>What is this feedback about?</li>
+                        <li>Identify the main themes: </li>
+                        <li>Identify the main themes with percentages: </li>
+                        <li>Identify the main 6 themes with percentages and mention counts:</li>
+                    </ul>
+                </p>
+            </TD>
+        </TR>
+    </table>
 </form>
 {% endblock %}
