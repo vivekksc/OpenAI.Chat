@@ -20,13 +20,14 @@ def index():
     completion = ''
     if request.method == 'POST':
         prompt = request.form['prompt']
+        tokensCount = request.form['tokensCount']
 
         if not prompt:
             #flash('A question or message is required!')
             pass
         else:
             # Call Az openAi service
-            completion = postMessage(prompt)
+            completion = postMessage(prompt, tokensCount)
             
     return render_template('index.html', completion=completion)
 
@@ -35,7 +36,7 @@ def hello():
     # Render the page
     return "Hello Python - welcome to chat app!"
 
-def postMessage(prompt):
+def postMessage(prompt, tokensCount):
     # Load config values
     basedir = os.path.abspath(os.path.dirname(__file__))
     configFilePath = os.path.join(basedir, 'config.json')
@@ -60,13 +61,19 @@ def postMessage(prompt):
     # Currently OPENAI API have the following versions available: 2022-12-01
     openai.api_version = config_details['OPENAI_API_VERSION']
 
+    maxTokensCount = config_details['MAX_TOKENS_COUNT']
+    if tokensCount is None or tokensCount.strip() == '' \
+        or int(tokensCount) < 1 or int(tokensCount) > maxTokensCount:
+        tokensCount = maxTokensCount
+
+    print(f'tokensCount: {tokensCount}')
     try:
         # Create a completion for the provided prompt and parameters
         # To know more about the parameters, checkout this documentation: https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference
         completion = openai.Completion.create(
                         prompt=prompt,
                         temperature=0,
-                        max_tokens=30,
+                        max_tokens=tokensCount,
                         engine=deployment_name)
 
         # print the completion
