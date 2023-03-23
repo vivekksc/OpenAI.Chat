@@ -69,7 +69,7 @@ def postMessage(prompt, tokensCount):
         completion = openai.Completion.create(
                         prompt=prompt,
                         temperature=0,
-                        max_tokens=tokensCount,
+                        max_tokens=int(tokensCount),
                         engine=deployment_name)
 
         # print the completion

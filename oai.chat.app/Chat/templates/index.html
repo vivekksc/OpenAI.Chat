@@ -11,7 +11,7 @@
                         Use this Chat to generate starter content, get help rewriting text or summarize multiple paragraphs.
                     </div>
                     <form>
-                        <textarea name="prompt" placeholder="What would you like to me to do?" maxlength="2000"></textarea>
+                        <textarea name="prompt" placeholder="What would you like to me to do?" maxlength="2000">{{ request.form['prompt'] }}</textarea>
                         <label for="tokensCount">Tokens</label>
                         <input type="number" name="tokensCount" min="1" max="4096" value="{{tokensCount}}" />
                         <!--<span id='remainingC'></span>-->
