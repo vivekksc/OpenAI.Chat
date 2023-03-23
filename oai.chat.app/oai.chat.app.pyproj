@@ -37,6 +37,7 @@
     <Folder Include="Common\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Chat\requirements.txt" />
     <Content Include="Chat\templates\index.html" />
     <Content Include="Chat\templates\base.html" />
     <Content Include="Chat\config.json" />
