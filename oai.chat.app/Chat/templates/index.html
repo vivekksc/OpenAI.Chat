@@ -2,19 +2,6 @@
 
 {% block content %}
 <form method="post">
-    <!--<label for="prompt">Ask</label>
-    <br>
-    <textarea name="prompt"
-              placeholder="Type your question or message"
-              rows="1"
-              cols="60">{{ request.form['prompt'] }}</textarea>
-    <br>
-
-    <label for="completion">Response</label>
-    <br>
-    <label name="completion">{{ completion }}</label>
-    <br>
-    <button type="submit">Send</button>-->
 
     <table width="90%" border=0 align="center">
         <TR>
@@ -24,9 +11,9 @@
                         Use this Chat to generate starter content, get help rewriting text or summarize multiple paragraphs.
                     </div>
                     <form>
-                        <textarea name="prompt" placeholder="What would you like to me to do?" maxlength="2000">{{ request.form['prompt'] }}</textarea>
+                        <textarea name="prompt" placeholder="What would you like to me to do?" maxlength="2000"></textarea>
                         <label for="tokensCount">Tokens</label>
-                        <input type="number" name="tokensCount" min="1" max="4096" value="{{ request.form['tokensCount'] }}" />
+                        <input type="number" name="tokensCount" min="1" max="4096" value="{{tokensCount}}" />
                         <!--<span id='remainingC'></span>-->
                         <button type="submit">Send</button>
                         <br><br><b>Here is my response:</b><br><br>

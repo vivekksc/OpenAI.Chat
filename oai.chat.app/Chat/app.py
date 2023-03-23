@@ -10,6 +10,13 @@ from os.path import join, dirname, realpath
 # typically __name__ when using a single module.
 app = Flask(__name__)
 
+
+# Load config values
+basedir = os.path.abspath(os.path.dirname(__file__))
+configFilePath = os.path.join(basedir, 'config.json')
+with open(configFilePath) as config_file:
+    _config_details = json.load(config_file)
+
 # Flask route decorators map / and /hello to the hello function.
 # To add other resources, create functions that generate the page contents
 # and add decorators to define the appropriate resource locators for them.
@@ -18,6 +25,8 @@ app = Flask(__name__)
 @app.route('/index', methods=('GET', 'POST'))
 def index():
     completion = ''
+    tokensCount = _config_details['DEFAULT_TOKENS_COUNT']
+
     if request.method == 'POST':
         prompt = request.form['prompt']
         tokensCount = request.form['tokensCount']
@@ -28,45 +37,32 @@ def index():
         else:
             # Call Az openAi service
             completion = postMessage(prompt, tokensCount)
-            
-    return render_template('index.html', completion=completion)
-
-@app.route('/hello')
-def hello():
-    # Render the page
-    return "Hello Python - welcome to chat app!"
+    
+    return render_template('index.html', completion=completion, tokensCount=tokensCount)
 
 def postMessage(prompt, tokensCount):
-    # Load config values
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    configFilePath = os.path.join(basedir, 'config.json')
-    with open(configFilePath) as config_file:
-        config_details = json.load(config_file)
-
-    #print(config_details)
 
     # Setting up the deployment name
-    deployment_name = config_details['COMPLETIONS_MODEL']
+    deployment_name = _config_details['COMPLETIONS_MODEL']
 
     # This is set to `azure`
     openai.api_type = "azure"
 
     # The API key for your Azure OpenAI resource.
     #openai.api_key = os.getenv("OPENAI_API_KEY")
-    openai.api_key = config_details["OPENAI_API_KEY"]
+    openai.api_key = _config_details["OPENAI_API_KEY"]
 
     # The base URL for your Azure OpenAI resource. e.g. "https://<your resource name>.openai.azure.com"
-    openai.api_base = config_details['OPENAI_API_BASE']
+    openai.api_base = _config_details['OPENAI_API_BASE']
 
     # Currently OPENAI API have the following versions available: 2022-12-01
-    openai.api_version = config_details['OPENAI_API_VERSION']
+    openai.api_version = _config_details['OPENAI_API_VERSION']
 
-    maxTokensCount = config_details['MAX_TOKENS_COUNT']
+    maxTokensCount = _config_details['MAX_TOKENS_COUNT']
     if tokensCount is None or tokensCount.strip() == '' \
         or int(tokensCount) < 1 or int(tokensCount) > maxTokensCount:
         tokensCount = maxTokensCount
 
-    print(f'tokensCount: {tokensCount}')
     try:
         # Create a completion for the provided prompt and parameters
         # To know more about the parameters, checkout this documentation: https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference
