@@ -4,6 +4,7 @@ import json
 import openai
 import os
 from os.path import join, dirname, realpath
+from key import secretValue
 
 # Create an instance of the Flask class that is the WSGI application.
 # The first argument is the name of the application module or package,
@@ -24,7 +25,7 @@ with open(configFilePath) as config_file:
 @app.route('/', methods=('GET', 'POST'))
 @app.route('/index', methods=('GET', 'POST'))
 def index():
-    completion = ''
+    completion = secretValue
     tokensCount = _config_details['DEFAULT_TOKENS_COUNT']
 
     if request.method == 'POST':

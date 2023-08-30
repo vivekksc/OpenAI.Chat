@@ -30,17 +30,22 @@
     <Compile Include="Chat\app.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Chat\key.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Chat\" />
     <Folder Include="Chat\templates\" />
     <Folder Include="Common\" />
+    <Folder Include="Properties\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Chat\requirements.txt" />
     <Content Include="Chat\templates\index.html" />
     <Content Include="Chat\templates\base.html" />
     <Content Include="Chat\config.json" />
+    <None Include="Properties\PublishProfiles\vc-webapp1 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\vc-webapp1 - FTP.pubxml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 
