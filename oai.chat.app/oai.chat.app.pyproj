@@ -44,6 +44,7 @@
     <Content Include="Chat\templates\index.html" />
     <Content Include="Chat\templates\base.html" />
     <Content Include="Chat\config.json" />
+    <Content Include="requirements.txt" />
     <None Include="Properties\PublishProfiles\vc-webapp1 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\vc-webapp1 - FTP.pubxml" />
   </ItemGroup>
