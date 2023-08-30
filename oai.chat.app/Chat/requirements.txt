@@ -1,4 +1,0 @@
-openai==0.27.2
-Flask==2.2.3
-azure-identity==1.14.0
-azure-keyvault-secrets==4.7.0
